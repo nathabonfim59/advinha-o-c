@@ -1,4 +1,5 @@
 # include <stdio.h>
+#include <stdlib.h>
 
 #define NUMERO_DE_TENTATIVAS 3
 
@@ -18,6 +19,8 @@ int main() {
     int tentativas = 1;
     /* Verifica se o usuário advinhou o número secreto */
     int ganhou = 0;
+    /* Quantidade de pontos do usuário */
+    double pontos = 1000;
 
     while (!ganhou) {
 
@@ -52,6 +55,8 @@ int main() {
         if (acertou) {
             printf("Você acertou!\n");
             printf("\n-> Parabés! Obrigado por jogar.\n");
+
+            printf("VOcê fez %.2f pontos.", pontos);
             
             ganhou = 1;
         } else if (maior) {
@@ -59,7 +64,11 @@ int main() {
         } else if (menor) {
             printf("Seu chute foi menor que o número secreto\n");
         }
-        
+
+        /* Pontos perdidos por errar uma tentativa */
+        int pontosPerdidos =  abs(chute - numeroSecreto) / (double)2;
+
+        pontos = pontos - pontosPerdidos;
         tentativas++;
     }
 
