@@ -17,7 +17,7 @@ Exemplo de pontuação
 
 ---
 
-### Gamaplay
+### Gameplay
 1. Menu
 > Seleção de dificuldade
 2. Maior número possível
