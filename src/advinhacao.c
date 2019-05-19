@@ -11,5 +11,10 @@ int main() {
     int numeroSecreto;
     numeroSecreto = 42;
 
-    printf("O número %d é secreto\n", numeroSecreto);
+    /* Chute do usuário */
+    int chute;
+
+    printf("Qual seu chute? ");
+    scanf("%d", &chute);
+    printf("\nVocê chutou o número %d \n", chute);
 }
