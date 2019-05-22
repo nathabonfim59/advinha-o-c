@@ -13,9 +13,29 @@
 int main() {
     while (1)
     {
+        int pontos = 1000;
+        int ganhou = 0;
         int escolhaMenu = menu();
         int numeroSecreto = gerarNumeroSecreto();
         int limiteDeTentativas = menuDificuldade();
+
+        for (int tentativa = 1; tentativa < limiteDeTentativas; tentativa++) {
+            int chute = chutarNumero(tentativa, limiteDeTentativas);
+
+            if (chute == numeroSecreto) {
+                menuGanhou(pontos);
+                ganhou = 1;
+                break;
+            } else if (chute > numeroSecreto) {
+                pontos = menuDistancia(1, pontos);
+            } else {
+                pontos = menuDistancia(0, pontos);
+            }
+        }
+
+        if (!ganhou) {
+            menuPerdeu();
+        }
     }
 }
 
@@ -172,4 +192,22 @@ void limpaTela() {
     #if defined(_WIN32) || defined(_WIN64)
         system("cls");
     #endif
+}
+
+/* Recebe a tentativa do usuário
+
+   Retorna o número chutado
+*/
+int chutarNumero(int tentativa, int limiteDeTentativas) {
+    limpaTela();
+
+    int chute = 0;
+
+    printf("/---------------------------\n");
+    printf("|  Tentativa %d de %d\n", tentativa, limiteDeTentativas);
+    printf("|---------------------------\n");
+    printf("|-> ");
+    scanf("%d", &chute);
+
+    return chute;
 }
