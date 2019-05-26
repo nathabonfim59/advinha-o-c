@@ -157,6 +157,7 @@ int gerarNumeroSecreto() {
             break;
         case 3:
             intervaloEscolhido = 1000;
+            break;
         
         default:
             intervaloEscolhido = 0;
@@ -267,9 +268,24 @@ int main() {
         int escolhaMenu = menu();
         int numeroSecreto = gerarNumeroSecreto();
         int limiteDeTentativas = menuDificuldade();
+        int chuteAnterior = -1;
 
         for (int tentativa = 1; tentativa < limiteDeTentativas; tentativa++) {
             int chute = chutarNumero(tentativa, limiteDeTentativas);
+            
+            if (chute == chuteAnterior) {
+                limpaTela();
+                printf("\nVocê chutou o mesmo número na tentativa anterior.\n");
+                printf(">> Tente novamente");
+                tentativa--;
+
+                int pause = 0;
+                scanf("%d", &pause);
+                
+                continue;
+            }
+
+            chuteAnterior = chute;
 
             if (chute == numeroSecreto) {
                 menuGanhou(pontos, tentativa);
